@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Card from './Card';
+import imgTitle from '../assets/letra1.png'
+
+
 
 const SimpsonsApi = () => {
     const [personajes, setPersonajes] = useState([]);
-    const url = 'https://apisimpsons.fly.dev/api/personajes?limit=10';
+    const url = 'https://apisimpsons.fly.dev/api/personajes?limit=12';
 
     useEffect(() => {
     axios(url)
@@ -17,17 +21,16 @@ const SimpsonsApi = () => {
 
   return (
     <div>
-        <h1>Personajes Simpsons</h1>
-        {personajes && personajes.map((personaje) =>{
-            return <div key={personaje.id}>
-                <h3>Nombre: {personaje.Nombre}</h3>
-                <img src={personaje.Imagen} />
-                <h4>Ocupación: {personaje.Ocupacion}</h4>
-                <h5>Historia: {personaje.Historia}</h5>
-
-            </div>
+       
+        <img style={{display: 'block', margin: 'auto', width: '30%', marginTop: '5%'}} src={imgTitle} alt="" />
+        
+        <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', margin: '5%'}}>
+            {personajes && personajes.map((personaje) =>{
+             return <div>
+                        <Card key={personaje.id} props={personaje}/>
+                    </div>
         })}
-
+        </div>
     </div>
   )
 }
